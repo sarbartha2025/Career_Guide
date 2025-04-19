@@ -1,0 +1,19 @@
+{
+  "name": "career_guide",
+  "version": "1.0.0",
+  "description": "A web app that offers career roadmaps and AI-based career suggestions",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^0.9.0",
+    "@google/generative-ai": "^0.24.0",
+    "axios": "^1.8.4",
+    "express": "^5.1.0"
+  }
+}
