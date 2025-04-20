@@ -22,62 +22,62 @@ app.use(express.static(path.join(__dirname, 'public')));
 const API_KEY = 'AIzaSyAvS3icr6P0q-TJRgjWtNrKw4OWPz5FF5U';
 
 // Gemini Test Function
-async function testGemini() {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    const result = await model.generateContent("Say hello from Gemini!");
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message: 'Hello' }),
-    });
+// async function testGemini() {
+//   const genAI = new GoogleGenerativeAI(API_KEY);
+//   try {
+//     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+//     const result = await model.generateContent("Say hello from Gemini!");
+//     const response = await fetch('/api/chat', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ message: 'Hello' }),
+//     });
     
-    const data = await response.json();
-    console.log(data);
+//     const data = await response.json();
+//     console.log(data);
     
-    const text = response.text();
-    console.log("✅ Gemini Response:", text);
-  } catch (error) {
-    console.error("❌ Error with Gemini API:", error);
-  }
-}
+//     const text = response.text();
+//     console.log("✅ Gemini Response:", text);
+//   } catch (error) {
+//     console.error("❌ Error with Gemini API:", error);
+//   }
+// }
 // testGemini();
 
 // Serve hackathon.html at root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'loginHTML.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'loginHTML.html'));
+// });
 
-// Optional: Handle chat API
-app.post('/api/chat', async (req, res) => {
-  const userMessage = req.body.message;
-  app.use(express.json());
+// // Optional: Handle chat API
+// app.post('/api/chat', async (req, res) => {
+//   const userMessage = req.body.message;
+//   app.use(express.json());
 
 
-  if (!userMessage) {
-    return res.status(400).json({ error: "Message is required" });
-  }
+//   if (!userMessage) {
+//     return res.status(400).json({ error: "Message is required" });
+//   }
 
-  try {
-    const response = await fetch('http://localhost:5501/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message: 'Hello' }),
-    });
+//   try {
+//     const response = await fetch('http://localhost:5501/api/chat', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ message: 'Hello' }),
+//     });
     
 
-    const reply = response.data.candidates[0]?.text || 'No valid response';
-    res.json({ reply });
-  } catch (error) {
-    console.error('💥 Gemini API Error:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to get response from Gemini API' });
-  }
-});
+//     const reply = response.data.candidates[0]?.text || 'No valid response';
+//     res.json({ reply });
+//   } catch (error) {
+//     console.error('💥 Gemini API Error:', error.response?.data || error.message);
+//     res.status(500).json({ error: 'Failed to get response from Gemini API' });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);

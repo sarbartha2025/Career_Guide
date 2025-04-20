@@ -10,28 +10,19 @@
 <body>
   <div class="container">
     <h1 id="welcome-msg">Welcome!</h1>
-    <div id="career-list" class="grid"></div>
     <div id="career-list" class="card-container"></div>
-<!-- Modal structure -->
-<div id="modal">
-    <div class="modal-content">
+    
+    <!-- Modal structure -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
         <span id="close-btn">&times;</span>
-        <img id="career-img" alt="Career image">
         <h2 id="career-title"></h2>
-        <ul id="career-steps"></ul>
-    </div>
-</div>
-  </div>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span id="close-btn">&times;</span>
-      <h2 id="career-title"></h2>
-      <img id="career-img" />
-      <ol id="career-steps"></ol>
+        <img id="career-img" alt="Career image" />
+        <ol id="career-steps"></ol>
+      </div>
     </div>
   </div>
 
-  <script src="hackathonJS.js"></script>
+  <script type="module" src="hackathonJS.js"></script>
 </body>
 </html>
