@@ -2,27 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Set character encoding and viewport for responsive design -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Page title -->
   <title>Career Options</title>
+  
+  <!-- Link to external CSS for styling -->
   <link rel="stylesheet" href="hackathonCSS.css" />
 </head>
 <body>
+  <!-- Main container for the content -->
   <div class="container">
+    <!-- Welcome message (personalized via JavaScript) -->
     <h1 id="welcome-msg">Welcome!</h1>
+    
+    <!-- Container where career cards will be rendered -->
     <div id="career-list" class="card-container"></div>
     
-    <!-- Modal structure -->
+    <!-- Modal structure for displaying career details -->
     <div class="modal" id="modal">
       <div class="modal-content">
+        <!-- Close button for the modal -->
         <span id="close-btn">&times;</span>
+        
+        <!-- Dynamic title of the selected career -->
         <h2 id="career-title"></h2>
+        
+        <!-- Image representing the career -->
         <img id="career-img" alt="Career image" />
+        
+        <!-- Ordered list of steps for the selected career -->
         <ol id="career-steps"></ol>
       </div>
     </div>
   </div>
 
+  <!-- Import and run external JavaScript with module support -->
   <script type="module" src="hackathonJS.js"></script>
 </body>
 </html>

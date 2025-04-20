@@ -2,26 +2,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta tags for character encoding and responsive behavior -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Page title -->
   <title>Career Roadmap Explorer</title>
+
+  <!-- Link to external CSS -->
   <link rel="stylesheet" href="hackathonCSS.css" />
 </head>
 <body>
+  <!-- Main container for the form -->
   <div class="container">
     <h1>Career Roadmap Explorer</h1>
     <p>Discover your future based on your Age and Stream</p>
+
+    <!-- User input form for name, age, and stream -->
     <form id="user-form">
+      <!-- Name input -->
       <div class="form-group">
         <label class="form-label" for="name">Your Name</label>
         <input type="text" id="name" class="form-input" placeholder="Enter your name" required />
       </div>
 
+      <!-- Age input -->
       <div class="form-group">
         <label class="form-label" for="age">Your Age</label>
         <input type="number" id="age" class="form-input" placeholder="Enter your age" min="10" max="30" required />
       </div>
 
+      <!-- Stream selection -->
       <div class="form-group">
         <label class="form-label" for="stream">Select Stream</label>
         <select id="stream" class="form-input" required>
@@ -32,43 +43,59 @@
         </select>
       </div>
 
+      <!-- Submit button -->
       <button type="submit" class="submit-btn">Find Careers</button>
     </form>
   </div>
 
+  <!-- AI Career Suggestion Section -->
   <div class="container ai-career-section">
     <h2>AI Career Suggestion</h2>
+
+    <!-- (Optional) Input for user interests - currently commented out -->
     <div class="form-group">
-      <!-- <label class="form-label" for="userInput">Your Interests</label>
-      <textarea id="userInput" class="form-input" rows="4" placeholder="Type your interests, hobbies, or goals..."></textarea> -->
+      <!--
+      <label class="form-label" for="userInput">Your Interests</label>
+      <textarea id="userInput" class="form-input" rows="4" placeholder="Type your interests, hobbies, or goals..."></textarea>
+      -->
     </div>
+
+    <!-- Button to toggle the AI chatbot -->
     <button class="submit-btn" onclick="toggleChat()">Ask AI</button>
 
-    <div id="chatbotContainer">
+    <!-- Container for embedded AI chatbot -->
+    <div id="chatbotContainer" style="display: none;">
       <button id="closeBtn" onclick="toggleChat()">x</button>
       <iframe
         id="chatbotFrame"
         src="https://www.chatbase.co/chatbot-iframe/orbEBTy_fwwC7ZS0oUDkF">
       </iframe>
     </div>
+  </div>
 
+  <!-- JavaScript for handling form submission -->
   <script>
+    // Form submission event listener
     document.getElementById('user-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+      e.preventDefault(); // Prevents page reload
+
+      // Get values from form inputs
       const name = document.getElementById('name').value;
       const age = parseInt(document.getElementById('age').value);
       const stream = document.getElementById('stream').value;
 
+      // Store user data in localStorage
       localStorage.setItem('userData', JSON.stringify({ name, age, stream }));
+
+      // Redirect to career suggestion page
       window.location.href = 'careers.html';
     });
-
- 
-    
-
   </script>
+
+  <!-- External JavaScript file -->
   <script src="hackathonJS.js"></script>
-  <script></script>
+
+  <!-- Function to toggle the visibility of chatbot container -->
   <script>
     function toggleChat() {
       const container = document.getElementById('chatbotContainer');

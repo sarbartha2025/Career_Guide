@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Career Path Explorer</title>
+
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Main dashboard container -->
     <div class="dashboard-container">
+
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <h2>Career Explorer</h2>
             </div>
             <ul class="nav-links">
+                <!-- Link to explore careers -->
                 <li class="nav-item">
                     <a href="hackathon.html">
                         <span class="nav-icon">🔍</span>
                         Explore Careers
                     </a>
                 </li>
-                <li class="nav-item">
-                    
-                        <a href="feedback.html" class="logout-btn">     🚪   Logout </a>
 
-                        <!-- <span class="nav-icon">🚪</span> -->
-                        <!-- Logout -->
+                <!-- Logout link (currently goes to feedback.html) -->
+                <li class="nav-item">
+                    <a href="feedback.html" class="logout-btn">
+                        🚪 Logout
                     </a>
+                    <!-- Note: Original span and comment kept for reference -->
+                    <!-- <span class="nav-icon">🚪</span> -->
                 </li>
             </ul>
         </nav>
 
-        <!-- Main Content -->
+        <!-- Main Content Section -->
         <main class="main-content">
             <div class="content-header">
+                <!-- Welcome message with user's name -->
                 <h1>Welcome, <span id="userName">User</span>!</h1>
+                <!-- Last login time -->
                 <p class="last-login">Last login: <span id="lastLogin">Loading...</span></p>
             </div>
 
+            <!-- Grid layout for dashboard cards -->
             <div class="dashboard-grid">
+
                 <!-- Profile Summary Card -->
                 <div class="dashboard-card">
                     <h3>Profile Summary 🔶</h3>
@@ -53,11 +64,14 @@
                 <div class="dashboard-card">
                     <h3>Quick Actions</h3>
                     <div class="quick-actions">
+                        <!-- Button to explore careers -->
                         <button class="action-btn" onclick="location.href='hackathon.html'">
                             Explore Careers
                         </button>
                     </div>
                 </div>
+
+                <!-- Premium Features Placeholder -->
                 <div class="dashboard-card">
                     <h3>Premium Features 🔥</h3>
                     <div class="quick-actions">
@@ -67,41 +81,43 @@
                     </div>
                 </div>
 
-                <!-- Recommended Paths Card -->
+                <!-- Placeholder for future recommended paths card -->
                 <!-- <div class="dashboard-card"></div> -->
-        
-                </div>
+
             </div>
         </main>
     </div>
 
+    <!-- JavaScript for loading user data and handling logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Load user data
+            // Retrieve user data and login info from localStorage
             const userData = JSON.parse(localStorage.getItem('userData'));
             const loginData = JSON.parse(localStorage.getItem('loginData'));
 
-            // Redirect if no user data
+            // Redirect to login page if user data is missing
             if (!userData) {
                 window.location.href = 'loginHTML.html';
                 return;
             }
 
-            // Update profile information
+            // Update profile and welcome section with user data
             document.getElementById('userName').textContent = userData.name;
             document.getElementById('profileName').textContent = userData.name;
             document.getElementById('profileEmail').textContent = userData.email;
             document.getElementById('profileAge').textContent = userData.age;
 
-            // Update last login
+            // Format and display last login timestamp
             if (loginData && loginData.timestamp) {
                 const lastLogin = new Date(loginData.timestamp);
                 document.getElementById('lastLogin').textContent = lastLogin.toLocaleString();
             }
 
-            // Load recommended paths based on stream
+            // Placeholder function to load recommended paths (implementation not shown)
             loadRecommendedPaths(userData.stream);
         });
+
+        // Function to handle logout logic
         function logout() {
             localStorage.removeItem('loginData');
             window.location.href = 'hackathon.html';
