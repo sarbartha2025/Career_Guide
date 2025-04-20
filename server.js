@@ -16,7 +16,9 @@ const __dirname = path.dirname(__filename);
 // Serve static files from 'public' folder
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'loginHTML.html'));
+});
 
 // Gemini API Key
 const API_KEY = 'AIzaSyAvS3icr6P0q-TJRgjWtNrKw4OWPz5FF5U';
