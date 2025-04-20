@@ -43,16 +43,14 @@
       <textarea id="userInput" class="form-input" rows="4" placeholder="Type your interests, hobbies, or goals..."></textarea>
     </div>
     <button class="submit-btn" onclick="toggleChat()">Ask AI</button>
-    
 
     <div id="chatbotContainer">
-      <button id="closeBtn" onclick="toggleChat()">❌</button>
+      <button id="closeBtn" onclick="toggleChat()">x</button>
       <iframe
         id="chatbotFrame"
         src="https://www.chatbase.co/chatbot-iframe/orbEBTy_fwwC7ZS0oUDkF">
       </iframe>
-    <pre id="aiResponse"></pre>
-  </div>
+    </div>
 
   <script>
     document.getElementById('user-form').addEventListener('submit', function(e) {
