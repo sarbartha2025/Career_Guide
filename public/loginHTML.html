@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Path Explorer - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Career Path Explorer</h2>
+                    <div class="tab-buttons">
+                        <button id="loginTab" class="primary-button active">Log in</button>
+                        <button id="signupTab" class="primary-button">Sign Up</button>
+                    </div>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="input-form">
+                    <div class="input-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                        
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                        
+                    </div>
+                    <button type="submit" class="primary-button submit-button">Login</button>
+                </form>
+
+                <!-- Sign Up Form -->
+                <!-- Sign Up Form -->
+<form id="signupForm" class="input-form hidden">
+    <div class="input-group">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" required>
+        
+    </div>
+    <div class="input-group">
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" required>
+        
+    </div>
+    <div class="input-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" required>
+        
+    </div>
+    <div class="input-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" required min="10" max="30">
+        
+    </div>
+    <button type="submit" class="primary-button submit-button">Sign Up</button>
+</form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get elements
+            const loginTab = document.getElementById('loginTab');
+            const signupTab = document.getElementById('signupTab');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+    
+            // Tab switching
+            loginTab.addEventListener('click', () => {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+            });
+    
+            signupTab.addEventListener('click', () => {
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+                signupTab.classList.add('active');
+                loginTab.classList.remove('active');
+            });
+    
+            // Form animations
+            document.querySelectorAll('.input-group input, .input-group select').forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('focused');
+                });
+    
+                input.addEventListener('blur', () => {
+                    if (!input.value) {
+                        input.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+    
+            // Login form submission
+            if (loginForm) {
+                loginForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+    
+                    if (!email || !password) {
+                        alert('Please fill in all fields');
+                        return false;
+                    }
+    
+                    // Store login data
+                    const loginData = {
+                        email: email,
+                        timestamp: new Date().toISOString()
+                    };
+                    localStorage.setItem('loginData', JSON.stringify(loginData));
+                    window.location.href = 'dashHTML.html';
+                };
+            }
+    
+            // Signup form submission
+            if (signupForm) {
+                signupForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('signupName').value.trim();
+                    const email = document.getElementById('signupEmail').value.trim();
+                    const password = document.getElementById('signupPassword').value;
+                    
+                    const age = document.getElementById('age').value;
+    
+                    // Validate all fields are filled
+                    if (!name || !email || !password || !age) {
+                        alert('Please fill in all fields');
+                        return false;
+                    }
+    
+                    // Validate age
+                    if (age < 10 || age > 30) {
+                        alert('Age must be between 10 and 30');
+                        return false;
+                    }
+    
+                    // Create user data object
+                    const userData = {
+                        name: name,
+                        email: email,
+                    
+                        age: parseInt(age),
+                        timestamp: new Date().toISOString()
+                    };
+    
+                    // Save to localStorage
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    console.log('User data saved:', userData); // Debug log
+    
+                    // Redirect to dashboard
+                    window.location.href = 'dashHTML.html';
+                    return false;
+                };
+            }
+    
+            // Add animation for select element
+            const streamSelect = document.getElementById('stream');
+            if (streamSelect) {
+                streamSelect.addEventListener('change', () => {
+                    if (streamSelect.value) {
+                        streamSelect.parentElement.classList.add('focused');
+                    } else {
+                        streamSelect.parentElement.classList.remove('focused');
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="hackathonJS.js"></script>
+    <script src="data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    
+    
+</body>
+</html>

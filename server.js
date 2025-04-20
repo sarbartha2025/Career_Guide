@@ -4,6 +4,7 @@ import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { error } from 'console';
 
 const app = express();
 const PORT = 5501;
@@ -16,6 +17,7 @@ const __dirname = path.dirname(__filename);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // Gemini API Key
 const API_KEY = 'AIzaSyAvS3icr6P0q-TJRgjWtNrKw4OWPz5FF5U';
 
@@ -25,40 +27,49 @@ async function testGemini() {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     const result = await model.generateContent("Say hello from Gemini!");
-    const response = result.response;
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: 'Hello' }),
+    });
+    
+    const data = await response.json();
+    console.log(data);
+    
     const text = response.text();
     console.log("✅ Gemini Response:", text);
   } catch (error) {
     console.error("❌ Error with Gemini API:", error);
   }
 }
-testGemini();
+// testGemini();
 
 // Serve hackathon.html at root
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'hackathon.html'));
+  res.sendFile(path.join(__dirname, 'public', 'loginHTML.html'));
 });
 
 // Optional: Handle chat API
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message;
+  app.use(express.json());
+
 
   if (!userMessage) {
     return res.status(400).json({ error: "Message is required" });
   }
 
   try {
-    const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateText?key=${API_KEY}`,
-      {
-        prompt: userMessage,
-        temperature: 0.7,
-        max_tokens: 500,
+    const response = await fetch('http://localhost:5501/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+      body: JSON.stringify({ message: 'Hello' }),
+    });
+    
 
     const reply = response.data.candidates[0]?.text || 'No valid response';
     res.json({ reply });
